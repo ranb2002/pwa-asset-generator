@@ -163,13 +163,34 @@ export default {
     'https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/',
 
   // Apple platform specs: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/
-  APPLE_ICON_SIZES: [180, 167, 152, 120],
+  APPLE_ICON_SIZES: [
+    40,
+    57,
+    58,
+    60,
+    72,
+    76,
+    80,
+    87,
+    114,
+    120,
+    144,
+    152,
+    167,
+    180,
+  ],
 
   // Android platform specs: https://developers.google.com/web/fundamentals/web-app-manifest/#icons
   // Windows platform specs: https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps/get-started
-  MANIFEST_ICON_SIZES: [192, 512],
+  // https://github.com/gokulkrishh/awesome-meta-and-manifest
+  MANIFEST_ICON_SIZES: [48, 72, 96, 144, 168, 192, 256, 512],
 
-  FAVICON_SIZES: [196],
+  // https://docs.microsoft.com/en-us/windows/uwp/design/style/app-icons-and-logos#tile-padding-recommendations
+  // https://docs.microsoft.com/en-us/uwp/api/windows.ui.startscreen.secondarytilevisualelements.shownameonsquare150x150logo?view=winrt-19041
+  // https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/dn455106(v=vs.85)?redirectedfrom=MSDN
+  MS_ICON_SIZES: [30, 44, 128, 71, 270, 558, { width: 558, height: 270 }],
+
+  FAVICON_SIZES: [16, 32, 36, 96, 196],
 
   HTML_META_ORDERED_SELECTOR_LIST,
 
@@ -178,6 +199,8 @@ export default {
   APPLE_SPLASH_FILENAME_PREFIX: 'apple-splash',
   APPLE_SPLASH_FILENAME_DARK_MODE_POSTFIX: '-dark',
   MANIFEST_ICON_FILENAME_PREFIX: 'manifest-icon',
+  MERGE_ICON_FILENAME_PREFIX: 'icon',
+  MS_ICON_FILENAME_PREFIX: 'mstile',
   APPLE_HIG_SPLASH_SCR_SPECS_DATA_GRID_SELECTOR: 'table tbody tr',
   WAIT_FOR_SELECTOR_TIMEOUT: 1000,
   BROWSER_TIMEOUT: 10000,

@@ -9,10 +9,16 @@ import {
 } from '../models/spec';
 import { Options } from '../models/options';
 
-const mapToSqImageFileObj = (fileNamePrefix: string, size: number): Image => ({
-  name: `${fileNamePrefix}-${size}`,
-  width: size,
-  height: size,
+const mapToSqImageFileObj = (
+  fileNamePrefix: string,
+  width: number,
+  height?: number,
+): Image => ({
+  name: height
+    ? `${fileNamePrefix}-${width}x${height}`
+    : `${fileNamePrefix}-${width}`,
+  width,
+  height: height || width,
   orientation: null,
 });
 
@@ -31,20 +37,56 @@ const mapToImageFileObj = (
 });
 
 const getIconImages = (options: Options): Image[] => {
-  let icons = [
-    ...constants.APPLE_ICON_SIZES.map((size) =>
-      mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
-    ),
-    ...constants.MANIFEST_ICON_SIZES.map((size) =>
-      mapToSqImageFileObj(constants.MANIFEST_ICON_FILENAME_PREFIX, size),
-    ),
-  ];
+  let icons;
+
+  if (options.mergeIcons) {
+    icons = [
+      ...constants.APPLE_ICON_SIZES,
+      ...constants.MANIFEST_ICON_SIZES,
+      ...constants.MS_ICON_SIZES,
+    ].map((size) => {
+      if (typeof size === 'object') {
+        return mapToSqImageFileObj(
+          constants.MERGE_ICON_FILENAME_PREFIX,
+          size.width,
+          size.height,
+        );
+      }
+
+      return mapToSqImageFileObj(constants.MERGE_ICON_FILENAME_PREFIX, size);
+    });
+  } else {
+    icons = [
+      ...constants.APPLE_ICON_SIZES.map((size) =>
+        mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
+      ),
+      ...constants.MANIFEST_ICON_SIZES.map((size) =>
+        mapToSqImageFileObj(constants.MANIFEST_ICON_FILENAME_PREFIX, size),
+      ),
+      ...constants.MS_ICON_SIZES.map((size) => {
+        if (typeof size === 'object') {
+          return mapToSqImageFileObj(
+            constants.MS_ICON_FILENAME_PREFIX,
+            size.width,
+            size.height,
+          );
+        }
+
+        return mapToSqImageFileObj(constants.MS_ICON_FILENAME_PREFIX, size);
+      }),
+    ];
+  }
 
   if (options.favicon) {
     icons = [
       ...icons,
       ...constants.FAVICON_SIZES.map((size) =>
-        mapToSqImageFileObj(constants.FAVICON_FILENAME_PREFIX, size),
+        mapToSqImageFileObj(
+          options.mergeIcons
+            ? constants.MERGE_ICON_FILENAME_PREFIX
+            : constants.FAVICON_FILENAME_PREFIX,
+          size,
+        ),
       ),
     ];
   }

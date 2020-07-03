@@ -142,6 +142,13 @@ export interface Options {
    @default false
    */
   readonly darkMode: boolean;
+
+  /**
+   Merge all icons
+
+   @default false
+   */
+  readonly mergeIcons: boolean;
 }
 
 export type CLIOptions = Partial<Options>;
