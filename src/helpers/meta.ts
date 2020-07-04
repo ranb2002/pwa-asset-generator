@@ -136,7 +136,7 @@ const generateHtmlForIndexPage = (
     )}`;
   }
 
-  if (!options.iconOnly && !options.faviconOnly) {
+  if (!options.iconOnly) {
     if (options.darkMode) {
       htmlMeta.appleLaunchImageDarkMode = `${generateAppleLaunchImageHtml(
         savedImages,

@@ -144,18 +144,22 @@ export interface Options {
   readonly darkMode: boolean;
 
   /**
-   Merge all icons
-
+   Generate Apple Touch icons
    @default false
    */
-  readonly mergeIcons: boolean;
+  readonly appleTouchIcons: boolean;
 
   /**
-   Only generate favicons
-
+   Generate manifest.json icons
    @default false
    */
-  readonly faviconOnly: boolean;
+  readonly manifestIcons: boolean;
+
+  /**
+   Generate Mstile icons
+   @default false
+   */
+  readonly mstileIcons: boolean;
 }
 
 export type CLIOptions = Partial<Options>;

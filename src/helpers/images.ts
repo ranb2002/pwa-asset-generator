@@ -13,14 +13,23 @@ const mapToSqImageFileObj = (
   fileNamePrefix: string,
   width: number,
   height?: number,
-): Image => ({
-  name: height
-    ? `${fileNamePrefix}-${width}x${height}`
-    : `${fileNamePrefix}-${width}`,
-  width,
-  height: height || width,
-  orientation: null,
-});
+): Image => {
+  let name = `${fileNamePrefix}-${width}`;
+  if (height) {
+    name = `${name}x${height}`;
+  }
+
+  if (fileNamePrefix === constants.APPLE_ICON_FILENAME_PREFIX) {
+    name = fileNamePrefix;
+  }
+
+  return {
+    name,
+    width,
+    height: height || width,
+    orientation: null,
+  };
+};
 
 const mapToImageFileObj = (
   fileNamePrefix: string,
@@ -39,30 +48,27 @@ const mapToImageFileObj = (
 const getIconImages = (options: Options): Image[] => {
   let icons: any[] = [];
 
-  if (options.mergeIcons) {
+  if (options.appleTouchIcons) {
     icons = [
-      ...constants.APPLE_ICON_SIZES,
-      ...constants.MANIFEST_ICON_SIZES,
-      ...constants.MS_ICON_SIZES,
-    ].map((size) => {
-      if (typeof size === 'object') {
-        return mapToSqImageFileObj(
-          constants.MERGE_ICON_FILENAME_PREFIX,
-          size.width,
-          size.height,
-        );
-      }
-
-      return mapToSqImageFileObj(constants.MERGE_ICON_FILENAME_PREFIX, size);
-    });
-  } else if (!options.faviconOnly) {
-    icons = [
+      ...icons,
       ...constants.APPLE_ICON_SIZES.map((size) =>
         mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
       ),
+    ];
+  }
+
+  if (options.manifestIcons) {
+    icons = [
+      ...icons,
       ...constants.MANIFEST_ICON_SIZES.map((size) =>
         mapToSqImageFileObj(constants.MANIFEST_ICON_FILENAME_PREFIX, size),
       ),
+    ];
+  }
+
+  if (options.mstileIcons) {
+    icons = [
+      ...icons,
       ...constants.MS_ICON_SIZES.map((size) => {
         if (typeof size === 'object') {
           return mapToSqImageFileObj(
@@ -77,19 +83,15 @@ const getIconImages = (options: Options): Image[] => {
     ];
   }
 
-  if (options.favicon || options.faviconOnly) {
+  if (options.favicon) {
     icons = [
       ...icons,
       ...constants.FAVICON_SIZES.map((size) =>
-        mapToSqImageFileObj(
-          options.mergeIcons
-            ? constants.MERGE_ICON_FILENAME_PREFIX
-            : constants.FAVICON_FILENAME_PREFIX,
-          size,
-        ),
+        mapToSqImageFileObj(constants.FAVICON_FILENAME_PREFIX, size),
       ),
     ];
   }
+
   return uniqWith(icons, isEqual);
 };
 
