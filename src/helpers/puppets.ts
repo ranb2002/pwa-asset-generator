@@ -320,7 +320,7 @@ const generateImages = async (
   }
 
   const allImages = [
-    ...(!options.iconOnly
+    ...(!options.iconOnly && !options.faviconOnly
       ? images.getSplashScreenImages(splashScreenMetaData, options)
       : []),
     ...(!options.splashOnly ? images.getIconImages(options) : []),

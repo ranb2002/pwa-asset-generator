@@ -37,7 +37,7 @@ const mapToImageFileObj = (
 });
 
 const getIconImages = (options: Options): Image[] => {
-  let icons;
+  let icons: any[] = [];
 
   if (options.mergeIcons) {
     icons = [
@@ -55,7 +55,7 @@ const getIconImages = (options: Options): Image[] => {
 
       return mapToSqImageFileObj(constants.MERGE_ICON_FILENAME_PREFIX, size);
     });
-  } else {
+  } else if (!options.faviconOnly) {
     icons = [
       ...constants.APPLE_ICON_SIZES.map((size) =>
         mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
@@ -77,7 +77,7 @@ const getIconImages = (options: Options): Image[] => {
     ];
   }
 
-  if (options.favicon) {
+  if (options.favicon || options.faviconOnly) {
     icons = [
       ...icons,
       ...constants.FAVICON_SIZES.map((size) =>

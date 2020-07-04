@@ -149,6 +149,13 @@ export interface Options {
    @default false
    */
   readonly mergeIcons: boolean;
+
+  /**
+   Only generate favicons
+
+   @default false
+   */
+  readonly faviconOnly: boolean;
 }
 
 export type CLIOptions = Partial<Options>;
