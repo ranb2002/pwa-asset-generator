@@ -163,34 +163,25 @@ export default {
     'https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/',
 
   // Apple platform specs: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/
-  APPLE_ICON_SIZES: [
-    40,
-    57,
-    58,
-    60,
-    72,
-    76,
-    80,
-    87,
-    114,
-    120,
-    144,
-    152,
-    167,
-    180,
-  ],
+  // https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
+  APPLE_ICON_SIZES: [180],
 
   // Android platform specs: https://developers.google.com/web/fundamentals/web-app-manifest/#icons
   // Windows platform specs: https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps/get-started
   // https://github.com/gokulkrishh/awesome-meta-and-manifest
-  MANIFEST_ICON_SIZES: [48, 72, 96, 144, 168, 192, 256, 512],
+  // https://developer.chrome.com/apps/manifest/icons
+  // https://bitsofco.de/a-siri-shortcut-to-generate-pwa-icons-and-web-app-manifest/
+  MANIFEST_ICON_SIZES: [16, 32, 48, 72, 96, 128, 144, 152, 168, 192, 256, 512],
 
   // https://docs.microsoft.com/en-us/windows/uwp/design/style/app-icons-and-logos#tile-padding-recommendations
   // https://docs.microsoft.com/en-us/uwp/api/windows.ui.startscreen.secondarytilevisualelements.shownameonsquare150x150logo?view=winrt-19041
   // https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/dn455106(v=vs.85)?redirectedfrom=MSDN
-  MS_ICON_SIZES: [30, 44, 128, 71, 270, 558, { width: 558, height: 270 }],
+  MS_ICON_SIZES: [
+    144,                                             // msapplication-TileImage used in index.html
+    ...[128, 270, 558, { width: 558, height: 270 }], // Static tiles used in browserconfig.xml
+  ],
 
-  FAVICON_SIZES: [16, 32, 36, 96, 196],
+  FAVICON_SIZES: [16, 32, 96, 196],
 
   HTML_META_ORDERED_SELECTOR_LIST,
 
