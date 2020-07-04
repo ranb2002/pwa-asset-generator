@@ -177,7 +177,7 @@ export default {
   // https://docs.microsoft.com/en-us/uwp/api/windows.ui.startscreen.secondarytilevisualelements.shownameonsquare150x150logo?view=winrt-19041
   // https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/dn455106(v=vs.85)?redirectedfrom=MSDN
   MS_ICON_SIZES: [
-    144,                                             // msapplication-TileImage used in index.html
+    144, // msapplication-TileImage used in index.html
     ...[128, 270, 558, { width: 558, height: 270 }], // Static tiles used in browserconfig.xml
   ],
 
