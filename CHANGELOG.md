@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/onderceylan/pwa-asset-generator/compare/v3.2.0...v3.2.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* **main:** fix xhtml option having no effect on module usage ([4dfa9c4](https://github.com/onderceylan/pwa-asset-generator/commit/4dfa9c4c61826c392a735099b456efb4ec3da070)), closes [#351](https://github.com/onderceylan/pwa-asset-generator/issues/351)
+
+# [3.2.0](https://github.com/onderceylan/pwa-asset-generator/compare/v3.1.3...v3.2.0) (2020-08-30)
+
+
+### Features
+
+* **main:** enable parallel execution ([98f0464](https://github.com/onderceylan/pwa-asset-generator/commit/98f046441a7930d0393610af7ec6b8156e076542)), closes [#357](https://github.com/onderceylan/pwa-asset-generator/issues/357)
+
+## [3.1.3](https://github.com/onderceylan/pwa-asset-generator/compare/v3.1.2...v3.1.3) (2020-07-30)
+
+
+### Bug Fixes
+
+* **main:** constraint default type to png for manifest icons ([bf6f87c](https://github.com/onderceylan/pwa-asset-generator/commit/bf6f87cf7125796fcba090a98b503111b835cbda)), closes [#337](https://github.com/onderceylan/pwa-asset-generator/issues/337)
+
+## [3.1.2](https://github.com/onderceylan/pwa-asset-generator/compare/v3.1.1...v3.1.2) (2020-07-30)
+
+
+### Bug Fixes
+
+* **puppets:** updated scraper for latest specs and improve fallback handling ([6506952](https://github.com/onderceylan/pwa-asset-generator/commit/6506952133df437ab191400533fd57585c81d7ff)), closes [#355](https://github.com/onderceylan/pwa-asset-generator/issues/355)
+
 ## [3.1.1](https://github.com/onderceylan/pwa-asset-generator/compare/v3.1.0...v3.1.1) (2020-06-03)
 
 
