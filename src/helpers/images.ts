@@ -5,12 +5,27 @@ import { Image, Orientation } from '../models/image';
 import { LaunchScreenSpec } from '../models/spec';
 import { Options } from '../models/options';
 
-const mapToSqImageFileObj = (fileNamePrefix: string, size: number): Image => ({
-  name: `${fileNamePrefix}-${size}`,
-  width: size,
-  height: size,
-  orientation: null,
-});
+const mapToSqImageFileObj = (
+  fileNamePrefix: string,
+  width: number,
+  height?: number,
+): Image => {
+  let name = `${fileNamePrefix}-${width}`;
+  if (height) {
+    name = `${name}x${height}`;
+  }
+
+  if (fileNamePrefix === constants.APPLE_ICON_FILENAME_PREFIX) {
+    name = fileNamePrefix;
+  }
+
+  return {
+    name,
+    width,
+    height: height || width,
+    orientation: null,
+  };
+};
 
 const mapToImageFileObj = (
   fileNamePrefix: string,
@@ -27,14 +42,42 @@ const mapToImageFileObj = (
 });
 
 const getIconImages = (options: Options): Image[] => {
-  let icons = [
-    ...constants.APPLE_ICON_SIZES.map((size) =>
-      mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
-    ),
-    ...constants.MANIFEST_ICON_SIZES.map((size) =>
-      mapToSqImageFileObj(constants.MANIFEST_ICON_FILENAME_PREFIX, size),
-    ),
-  ];
+  let icons: any[] = [];
+
+  if (options.appleTouchIcons) {
+    icons = [
+      ...icons,
+      ...constants.APPLE_ICON_SIZES.map((size) =>
+        mapToSqImageFileObj(constants.APPLE_ICON_FILENAME_PREFIX, size),
+      ),
+    ];
+  }
+
+  if (options.manifestIcons) {
+    icons = [
+      ...icons,
+      ...constants.MANIFEST_ICON_SIZES.map((size) =>
+        mapToSqImageFileObj(constants.MANIFEST_ICON_FILENAME_PREFIX, size),
+      ),
+    ];
+  }
+
+  if (options.mstileIcons) {
+    icons = [
+      ...icons,
+      ...constants.MS_ICON_SIZES.map((size) => {
+        if (typeof size === 'object') {
+          return mapToSqImageFileObj(
+            constants.MS_ICON_FILENAME_PREFIX,
+            size.width,
+            size.height,
+          );
+        }
+
+        return mapToSqImageFileObj(constants.MS_ICON_FILENAME_PREFIX, size);
+      }),
+    ];
+  }
 
   if (options.favicon) {
     icons = [
@@ -44,6 +87,7 @@ const getIconImages = (options: Options): Image[] => {
       ),
     ];
   }
+
   return uniqWith(icons, isEqual);
 };
 

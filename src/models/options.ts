@@ -142,6 +142,24 @@ export interface Options {
    @default false
    */
   readonly darkMode: boolean;
+
+  /**
+   Generate Apple Touch icons
+   @default false
+   */
+  readonly appleTouchIcons: boolean;
+
+  /**
+   Generate manifest.json icons
+   @default false
+   */
+  readonly manifestIcons: boolean;
+
+  /**
+   Generate Mstile icons
+   @default false
+   */
+  readonly mstileIcons: boolean;
 }
 
 export type CLIOptions = Partial<Options>;
